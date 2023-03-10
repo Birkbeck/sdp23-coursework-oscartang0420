@@ -3,11 +3,9 @@ package sml;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-// TODO: write a JavaDoc for the class
+import java.util.stream.Collectors;
 
 /**
- *
  * @author ...
  */
 public final class Labels {
@@ -22,7 +20,9 @@ public final class Labels {
 	public void addLabel(String label, int address) {
 		Objects.requireNonNull(label);
 		// TODO: Add a check that there are no label duplicates.
-		labels.put(label, address);
+		if (!labels.containsKey(label)) {
+			labels.put(label, address);
+		}
 	}
 
 	/**
@@ -32,9 +32,12 @@ public final class Labels {
 	 * @return the address the label refers to
 	 */
 	public int getAddress(String label) {
-		// TODO: Where can NullPointerException be thrown here?
-		//       (Write an explanation.)
-		//       Add code to deal with non-existent labels.
+		if (!labels.containsKey(label)) {
+			// TODO: Where can NullPointerException be thrown here?
+			//       (Write an explanation.)
+			//       Add code to deal with non-existent labels.
+			throw new NullPointerException("No label was found");
+		}
 		return labels.get(label);
 	}
 
@@ -47,10 +50,26 @@ public final class Labels {
 	@Override
 	public String toString() {
 		// TODO: Implement the method using the Stream API (see also class Registers).
-		return "";
+		return labels.entrySet().stream()
+				.sorted(Map.Entry.comparingByKey())
+				.map(e -> e.getKey() + " -> " + e.getValue())
+				.collect(Collectors.joining(", ", "[", "]"));
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (o instanceof Labels other) {
+			return labels.equals(other.labels);
+		}
+		return false;
+	}
 	// TODO: Implement equals and hashCode (needed in class Machine).
+	@Override
+	public int hashCode() {
+		return labels.hashCode();
+	}
 
 	/**
 	 * Removes the labels

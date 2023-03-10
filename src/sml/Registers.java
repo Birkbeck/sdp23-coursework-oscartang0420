@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 /**
  *
- * @author ...
+ * @author Wing Kui Tang
  */
 public final class Registers {
     private final Map<Register, Integer> registers = new HashMap<>();
@@ -47,6 +47,7 @@ public final class Registers {
 
     // TODO: use pattern matching for instanceof
     // https://docs.oracle.com/en/java/javase/14/language/pattern-matching-instanceof-operator.html
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof Registers) {
@@ -55,6 +56,7 @@ public final class Registers {
         }
         return false;
     }
+
 
     @Override
     public int hashCode() {

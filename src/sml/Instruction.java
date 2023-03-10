@@ -5,7 +5,7 @@ package sml;
 /**
  * Represents an abstract instruction.
  *
- * @author ...
+ * @author Wing Kui Tang
  */
 public abstract class Instruction {
 	protected final String label;
@@ -15,7 +15,7 @@ public abstract class Instruction {
 	 * Constructor: an instruction with a label and an opcode
 	 * (opcode must be an operation of the language)
 	 *
-	 * @param label optional label (can be null)
+	 * @param label  optional label (can be null)
 	 * @param opcode operation name
 	 */
 	public Instruction(String label, String opcode) {
@@ -38,8 +38,8 @@ public abstract class Instruction {
 	 *
 	 * @param machine the machine the instruction runs on
 	 * @return the new program counter (for jump instructions)
-	 *          or NORMAL_PROGRAM_COUNTER_UPDATE to indicate that
-	 *          the instruction with the next address is to be executed
+	 * or NORMAL_PROGRAM_COUNTER_UPDATE to indicate that
+	 * the instruction with the next address is to be executed
 	 */
 
 	public abstract int execute(Machine machine);
@@ -49,9 +49,12 @@ public abstract class Instruction {
 	}
 
 	// TODO: What does abstract in the declaration below mean?
-	//       (Write a short explanation.)
+	//The functions function toString(), equals(), and hashCode() are all specified as abstract,
+	// meaning that the present class does not implement them;
+	// nonetheless, any subclass that extends this class is required to implement them.
 	@Override
 	public abstract String toString();
-
-	// TODO: Make sure that subclasses also implement equals and hashCode (needed in class Machine).
+	public abstract boolean equals(Object o);
+	public abstract int hashCode();
 }
+// TODO: Make sure that subclasses also implement equals and hashCode (needed in class Machine).
