@@ -6,6 +6,7 @@ import sml.RegisterName;
 import java.util.Objects;
 
 /**
+ * An instruction for adding the contents of one register and the contents of another register.
  *
  */
 public class AddInstruction extends Instruction {
