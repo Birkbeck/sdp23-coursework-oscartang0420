@@ -11,7 +11,7 @@ import sml.Registers;
 
 import static sml.Registers.Register.*;
 
-class AddInstructionTest {
+class SubInstructionTest {
   private Machine machine;
   private Registers registers;
 
@@ -30,11 +30,11 @@ class AddInstructionTest {
 
   @Test
   void executeValid() {
-    registers.set(EAX, 5);
+    registers.set(EAX, 7);
     registers.set(EBX, 6);
     Instruction instruction = new AddInstruction(null, EAX, EBX);
     instruction.execute(machine);
-    Assertions.assertEquals(11, machine.getRegisters().get(EAX));
+    Assertions.assertEquals(1, machine.getRegisters().get(EAX));
   }
 
   @Test
@@ -43,25 +43,6 @@ class AddInstructionTest {
     registers.set(EBX, 6);
     Instruction instruction = new AddInstruction(null, EAX, EBX);
     instruction.execute(machine);
-    Assertions.assertEquals(1, machine.getRegisters().get(EAX));
-  }
-  @Test
-  void testToString(){
-    Instruction instruction = new AddInstruction("f1", EAX, EDX);
-    Assertions.assertEquals(instruction.toString(), "f1: add EAX EDX");
-  }
-
-  @Test
-  void testEqualsMethod1() {
-    Instruction instruction1 = new AddInstruction(null, EAX, EBX);
-    Instruction instruction2 = new AddInstruction(null, EAX, EBX);
-    Assertions.assertTrue(instruction1.equals(instruction2));
-  }
-
-  @Test
-  void testEqualsMethod2() {
-    Instruction instruction1 = new AddInstruction(null, EAX, EBX);
-    Instruction instruction2 = new AddInstruction(null, EAX, EBX);
-    Assertions.assertTrue(instruction1.equals(instruction2));
+    Assertions.assertEquals(-11, machine.getRegisters().get(EAX));
   }
 }
